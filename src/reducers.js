@@ -7,11 +7,7 @@ const INIT_STATE = {
 export default (state = INIT_STATE, action) => {
   switch (action.type) {
     case ADD_TODO:
-      const item = {
-        id: Date.now(),
-        text: action.payload,
-        done: false,
-      };
+      const item = action.payload;
       return { todoItems: [...state.todoItems, item] };
 
     case TOGGLE_DONE:

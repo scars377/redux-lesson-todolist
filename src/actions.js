@@ -1,12 +1,14 @@
 import { ADD_TODO, TOGGLE_DONE } from './constants';
+import * as api from './api';
 
-// text
-export const addTodo = (payload) => ({
-  type: ADD_TODO,
-  payload,
-});
+export const addTodo = (text) => async (dispatch) => {
+  const item = await api.addTodo(text);
+  dispatch({
+    type: ADD_TODO,
+    payload: item,
+  });
+};
 
-// id
 export const toggleDone = (payload) => ({
   type: TOGGLE_DONE,
   payload,
