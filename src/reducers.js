@@ -1,16 +1,18 @@
 import { ADD_TODO, TOGGLE_DONE } from './constants';
+import { handleActions } from 'redux-actions';
 
 const INIT_STATE = {
   todoItems: [],
 };
 
-export default (state = INIT_STATE, action) => {
-  switch (action.type) {
-    case ADD_TODO:
+export default handleActions(
+  {
+    [ADD_TODO]: (state, action) => {
       const item = action.payload;
       return { todoItems: [...state.todoItems, item] };
+    },
 
-    case TOGGLE_DONE:
+    [TOGGLE_DONE]: (state, action) => {
       const id = action.payload;
       return {
         todoItems: state.todoItems.map((item) =>
@@ -22,8 +24,7 @@ export default (state = INIT_STATE, action) => {
               },
         ),
       };
-
-    default:
-      return state;
-  }
-};
+    },
+  },
+  INIT_STATE,
+);
